@@ -423,7 +423,7 @@ function start_menu(){
     loggreen " ====================================================="
     loggreen " 描述：v2ray(vless) + tcp + xtls一键安装脚本"
     loggreen " 系统：支持centos7/debian9+/ubuntu16.04+     "
-    loggreen " 作者：atrandys  www.atrandys.com"
+    loggreen " 作者：by huarong2357"
     loggreen " ====================================================="
     echo
     loggreen " 1. 安装 vless + tcp + xtls"
