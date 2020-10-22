@@ -189,7 +189,8 @@ server {
     server_name  $your_domain;
     root /usr/share/nginx/html/;
     index index.php index.html;
-    #rewrite ^(.*)$  https://\$host\$1 permanent; 
+    #rewrite ^(.*)$  https://\$host\$1 permanent;
+    return 301 https://$host$request_uri;
 }
 EOF
     loggreen "$(date +"%Y-%m-%d %H:%M:%S") ==== 检测nginx配置文件"
