@@ -63,8 +63,8 @@ check_release(){
                 #logcmd "yum install -y policycoreutils-python"
                 #semanage port -a -t http_port_t -p tcp 80
                 #semanage port -a -t http_port_t -p tcp 443
-                #semanage port -a -t http_port_t -p tcp 37212
-                #semanage port -a -t http_port_t -p tcp 37213
+                #semanage port -a -t http_port_t -p tcp 27212
+                #semanage port -a -t http_port_t -p tcp 27213
             elif [ "$CHECK" == "SELINUX=permissive" ]; then
                 loggreen "$(date +"%Y-%m-%d %H:%M:%S") - SELinux状态非disabled,关闭SELinux."
                 setenforce 0
@@ -172,13 +172,13 @@ EOF
 
 cat > /etc/nginx/conf.d/default.conf<<-EOF
  server {
-    listen       127.0.0.1:37212;
+    listen       127.0.0.1:27212;
     server_name  $your_domain;
     root /usr/share/nginx/html;
     index index.php index.html index.htm;
 }
  server {
-    listen       127.0.0.1:37213 http2;
+    listen       127.0.0.1:27213 http2;
     server_name  $your_domain;
     root /usr/share/nginx/html;
     index index.php index.html index.htm;
@@ -244,11 +244,11 @@ cat > /usr/local/etc/v2ray/config.json<<-EOF
                 "decryption": "none", 
                 "fallbacks": [
                     {
-                        "dest": 37212
+                        "dest": 27212
                     }, 
                     {
                         "alpn": "h2", 
-                        "dest": 37213
+                        "dest": 27213
                     }
                 ]
             }, 
@@ -286,7 +286,7 @@ cat > /usr/local/etc/v2ray/client.json<<-EOF
     },
     "inbounds": [
         {
-            "port": 1080,
+            "port": 10086,
             "listen": "127.0.0.1",
             "protocol": "socks",
             "settings": {
@@ -327,8 +327,8 @@ EOF
     if [ -d "/usr/share/nginx/html/" ]; then
         cd /usr/share/nginx/html/ && rm -f ./*
         #wget https://github.com/atrandys/v2ray-ws-tls/raw/master/web.zip >/dev/null 2>&1
-        logcmd "wget https://github.com/atrandys/trojan/raw/master/fakesite.zip"
-        logcmd "unzip -o fakesite.zip"
+        logcmd "wget https://raw.githubusercontent.com/gongz5481/elsa-lean/main/web.zip"
+        logcmd "unzip -o web.zip"
         #unzip web.zip >/dev/null 2>&1
     fi
     #systemctl stop v2ray
